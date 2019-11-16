@@ -97,7 +97,15 @@
         在ZooKeeper中, 能改变ZooKeeper服务器状态的操作称为事务操作。一般包括数据节点创建与删除, 数据内容更新和客户端会话
         创建与失效等操作。对应每一个事务请求, ZooKeeper都会为其分配一个全局唯一的事务ID, 用 ZXID 表示, 通常是一个64位的数字。
         每一个 ZXID对应一次更新操作, 从这些 ZXID 中可以间接地识别出 ZooKeeper 处理这些事务操作请求的全局顺序。
-
+    3.10 java操作api
+        3.10.1 java原生api (操作复杂, 不建议使用)
+        3.10.2 zkClient (不建议使用)
+            step1: jar包引入：
+                    <dependency>
+                        <groupId>com.101tec</groupId>
+                        <artifactId>zkclient</artifactId>
+                        <version>0.10</version>
+                    </dependency>
         
                          
             
