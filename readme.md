@@ -100,12 +100,15 @@
     3.10 java操作api
         3.10.1 java原生api (操作复杂, 不建议使用)
         3.10.2 zkClient (不建议使用)
-            step1: jar包引入：
-                    <dependency>
-                        <groupId>com.101tec</groupId>
-                        <artifactId>zkclient</artifactId>
-                        <version>0.10</version>
-                    </dependency>
+            jar包引入：
+                <dependency>
+                    <groupId>com.101tec</groupId>
+                    <artifactId>zkclient</artifactId>
+                    <version>0.10</version>
+                </dependency>
+        3.10.3 curator (推荐使用)
+            jar包引入
+                
         
                          
             
