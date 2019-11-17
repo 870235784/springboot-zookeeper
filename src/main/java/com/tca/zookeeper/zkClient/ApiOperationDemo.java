@@ -9,7 +9,7 @@ import org.I0Itec.zkclient.ZkClient;
  * ZkClient 常用api
  */
 @Slf4j
-public class ZkClientApiOperationDemo {
+public class ApiOperationDemo {
 
     private static final String CONNECTION_URL_PORT = "127.0.0.1:2181";
 

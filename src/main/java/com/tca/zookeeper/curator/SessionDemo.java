@@ -38,5 +38,17 @@ public class SessionDemo {
         log.info("创建成功！, {}", curatorFramework2);
     }
 
+    /**
+     * 获取实例并启动
+     * @return
+     */
+    public static CuratorFramework getInstance() {
+        CuratorFramework curatorFramework = CuratorFrameworkFactory.builder().connectString(CONNECTION_URL_PORT).connectionTimeoutMs(CONNECTION_TIME_OUT)
+                .sessionTimeoutMs(SESSION_TIME_OUT).retryPolicy(new ExponentialBackoffRetry(BASE_SLEEP_TIME, MAX_RETRIES))
+                .build();
+        curatorFramework.start();
+        return curatorFramework;
+    }
+
 
 }

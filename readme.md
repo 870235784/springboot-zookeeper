@@ -106,9 +106,18 @@
                     <artifactId>zkclient</artifactId>
                     <version>0.10</version>
                 </dependency>
-        3.10.3 curator (推荐使用)
+        3.10.3 curator (推荐使用: 操作简单, 支持fluent风格(build模式), 更强大的应用)
             jar包引入
-                
+                <dependency>
+                    <groupId>org.apache.curator</groupId>
+                    <artifactId>curator-framework</artifactId>
+                    <version>2.11.0</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.curator</groupId>
+                    <artifactId>curator-recipes</artifactId>
+                    <version>2.11.0</version>
+                </dependency>
         
                          
             
