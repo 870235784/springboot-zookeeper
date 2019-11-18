@@ -106,7 +106,7 @@
                     <artifactId>zkclient</artifactId>
                     <version>0.10</version>
                 </dependency>
-        3.10.3 curator (推荐使用: 操作简单, 支持fluent风格(build模式), 更强大的应用)
+        3.10.3 curator (netflix开源项目 推荐使用: 操作简单, 支持fluent风格(build模式), 更强大的应用)
             jar包引入
                 <dependency>
                     <groupId>org.apache.curator</groupId>

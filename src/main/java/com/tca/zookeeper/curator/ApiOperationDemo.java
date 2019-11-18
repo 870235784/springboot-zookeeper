@@ -2,8 +2,10 @@ package com.tca.zookeeper.curator;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.api.transaction.CuratorTransactionResult;
 import org.apache.zookeeper.data.Stat;
 
+import java.util.Collection;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -60,6 +62,11 @@ public class ApiOperationDemo {
             log.info("执行主函数的线程: {}", Thread.currentThread().getName());
         }
 
+        // 6.事务操作(curator独有)
+        String transPath = "/trans";
+        Collection<CuratorTransactionResult> commitResult = curatorFramework.inTransaction().setData().forPath(callBackPath,
+                "你好".getBytes()).and().setData().forPath(transPath, "你好".getBytes()).and().commit();
+        commitResult.forEach(curatorTransactionResult -> log.info("处理成功！{}", curatorTransactionResult.getForPath()));
 
     }
 }
