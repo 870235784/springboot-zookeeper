@@ -3,13 +3,13 @@ package com.tca.zookeeper.curator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.api.transaction.CuratorTransactionResult;
+import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
 
 import java.util.Collection;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author zhoua
@@ -19,6 +19,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ApiOperationDemo {
 
     private static CountDownLatch countDownLatch = new CountDownLatch(1);
+
+    private static ExecutorService threadPool = Executors.newFixedThreadPool(20);
 
     public static void main(String[] args) throws Exception {
         // 获取操作对象
@@ -48,7 +50,22 @@ public class ApiOperationDemo {
             log.info("删除 /callback 及其子节点成功！");
         }
 
-        // 5.异步创建节点并添加回调
+        // 5.创建临时节点
+        for (int i = 0; i < 30; i++) {
+            threadPool.execute(() -> {
+                try {
+                    String pathSequence = curatorFramework.create().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath("/ephemeral",
+                            "hello world".getBytes());
+                    log.info("pathSequence = {}", pathSequence);
+                } catch (Exception e) {
+                    log.error("创建临时节点出错:", e);
+                }
+            });
+        }
+        threadPool.shutdown();
+
+
+        // 6.异步创建节点并添加回调
         if (curatorFramework.checkExists().forPath(callBackPath) == null) {
             ExecutorService executor = Executors.newSingleThreadExecutor();
             curatorFramework.create().creatingParentsIfNeeded().inBackground((curatorFrameworkCallback, curatorEvent) ->
@@ -62,7 +79,7 @@ public class ApiOperationDemo {
             log.info("执行主函数的线程: {}", Thread.currentThread().getName());
         }
 
-        // 6.事务操作(curator独有)
+        // 7.事务操作(curator独有)
         String transPath = "/trans";
         Collection<CuratorTransactionResult> commitResult = curatorFramework.inTransaction().setData().forPath(callBackPath,
                 "你好".getBytes()).and().setData().forPath(transPath, "你好".getBytes()).and().commit();

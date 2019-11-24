@@ -51,7 +51,8 @@
     3.6 znode
         3.6.1 概念：zookeeper维护一个类似文件系统的数据结构, 每个子项目都是一个znode节点
         3.6.2 分类：
-                persistent, persistent_sequential, ephemeral, ephemeral_sequential
+                persistent, persistent_sequential(会记录每个子节点创建的先后顺序), 
+                ephemeral(生命周期和会话一样), ephemeral_sequential
         3.6.3 基本增删查改操作
             ls ${path} : 列举path下的子结点
             create ${path} value : 创建节点
@@ -82,6 +83,7 @@
             Follower/Observer: 
                 Follower 和 Observer 都能提供读服务, 不能提供写服务。两者区别在于, Observer机器不参与Leader选举过程,
                 也不参与写操作的『过半写成功』策略, 因此Observer可以在不影响写性能的情况下提升集群的读性能
+        3.7.2 安装
     3.8 session会话
         3.8.1 概念
             Session 是指客户端会话。
@@ -118,6 +120,15 @@
                     <artifactId>curator-recipes</artifactId>
                     <version>2.11.0</version>
                 </dependency>
+    3.11 zookeeper应用场景详解
+        3.11.1 数据发布订阅/配置中心 —— 实现配置信息的集中式管理和数据的动态更新
+            3.11.1.1 实现配置中心有两种模式：push 、pull
+            3.11.1.2 zookeeper采用的是推拉相结合的方式。 客户端向服务器端注册自己需要关注的节点。一旦节点数据发生变化, 那么服务
+                        器端就会向客户端发送watcher事件通知。客户端收到通知后, 主动到服务器端获取更新后的数据
+        3.11.2 负载均衡
+        3.11.3 分布式锁
+
+        
         
                          
             
