@@ -38,7 +38,7 @@ public class ZNodeEventDemo {
             curatorFramework.create().forPath(nodeCachePath, "hello world".getBytes());
         }
         // 2.创建NodeCache对象并开启
-        NodeCache nodeCache = new NodeCache(curatorFramework, nodeCachePath);
+        NodeCache nodeCache = new NodeCache(curatorFramework, nodeCachePath, true);
         nodeCache.start(true);
         // 3.添加监听
         nodeCache.getListenable().addListener(() -> {

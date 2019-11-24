@@ -120,6 +120,8 @@
                     <artifactId>curator-recipes</artifactId>
                     <version>2.11.0</version>
                 </dependency>
+            api教学：
+                http://throwable.coding.me/2018/12/16/zookeeper-curator-usage/#%E7%AE%80%E4%BB%8B
     3.11 zookeeper应用场景详解
         3.11.1 数据发布订阅/配置中心 —— 实现配置信息的集中式管理和数据的动态更新
             3.11.1.1 实现配置中心有两种模式：push 、pull
@@ -127,6 +129,10 @@
                         器端就会向客户端发送watcher事件通知。客户端收到通知后, 主动到服务器端获取更新后的数据
         3.11.2 负载均衡
         3.11.3 分布式锁
+            原理: https://blog.csdn.net/lzb348110175/article/details/97766260
+            3.11.3.1 基于zookeeper javaapi实现
+            3.11.3.2 基于curator实现
+        3.11.4 Leaders选举
 
         
         
